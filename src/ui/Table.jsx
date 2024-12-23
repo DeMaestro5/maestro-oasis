@@ -96,8 +96,8 @@ function Body({ data, render }) {
 }
 
 Table.Header = Header;
-Table.Row = Row;
 Table.Body = Body;
 Table.Row = Row;
+Table.Footer = Footer;
 
 export default Table;
