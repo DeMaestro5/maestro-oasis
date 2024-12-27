@@ -70,27 +70,27 @@ function BookingDetail() {
             Check Out
           </Button>
         )}
+        <Modal>
+          <Modal.Open opens='delete'>
+            <Button variation='danger'>Delete Booking</Button>
+          </Modal.Open>
+
+          <Modal.Window name='delete'>
+            <ConfirmDelete
+              onConfirm={() =>
+                deleteBooking(bookingId, {
+                  onSettled: () => navigate(-1),
+                })
+              }
+              resourceName='booking'
+              disabled={isDeletingBookings}
+            />
+          </Modal.Window>
+        </Modal>
         <Button variation='secondary' onClick={moveBack}>
           Back
         </Button>
       </ButtonGroup>
-      <Modal>
-        <Modal.Open opens='delete'>
-          <Button variation='danger'>Delete Booking</Button>
-        </Modal.Open>
-
-        <Modal.Window name='delete'>
-          <ConfirmDelete
-            onConfirm={() =>
-              deleteBooking(bookingId, {
-                onSettled: () => navigate(-1),
-              })
-            }
-            resourceName='booking'
-            disabled={isDeletingBookings}
-          />
-        </Modal.Window>
-      </Modal>
     </>
   );
 }
