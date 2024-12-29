@@ -11,5 +11,7 @@ export function useCabins() {
     queryFn: getCabins,
   });
 
+  console.log(cabins);
+
   return { isLoading, cabins, error };
 }
