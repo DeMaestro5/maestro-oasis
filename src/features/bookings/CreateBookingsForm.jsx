@@ -4,18 +4,15 @@ import Button from '../../ui/Button';
 import Select from '../../ui/Select';
 import { useForm } from 'react-hook-form';
 import FormRow from '../../ui/FormRow';
-import { useCreateCabin } from '../cabins/useCreateCabin';
-import { useUpdateCabin } from '../cabins/useUpdateCabin';
-import { useEffect, useState } from 'react';
+
 import { useCreateBooking } from '../../features/bookings/useCreateBooking';
 import { useCabins } from '../cabins/useCabins';
 import { useGuests } from '../guests/useGuests';
 
 function CreateBookingsForm({ onCloseModal }) {
-  const { createBooking, isCreatingBooking } = useCreateBooking();
+  const { createBooking } = useCreateBooking();
 
-  const { register, handleSubmit, reset, formState, watch, setValue } =
-    useForm();
+  const { register, handleSubmit, formState, watch, setValue } = useForm();
   const { errors } = formState;
   const { cabins, isLoading } = useCabins();
   const { guests, isLoading: isGuestsLoading } = useGuests();
@@ -24,15 +21,6 @@ function CreateBookingsForm({ onCloseModal }) {
 
   // Handle form submission
   function onSubmit(data) {
-    // // Create a booking object with references to cabinId and guestId
-    // const bookingData = {
-    //   ...data,
-    //   cabinId: data.cabinId,
-    //   guestId: data.guestId,
-    //   totalPrice: Number(data.cabinPrice) + Number(data.extrasPrice),
-    // };
-    // createBooking(bookingData); // Submit to API
-    console.log(data);
     const bookingData = {
       ...data,
       cabinId: data.cabinId,
@@ -122,7 +110,6 @@ function CreateBookingsForm({ onCloseModal }) {
         />
       </FormRow>
 
-      {/* Cabin Selection */}
       <FormRow label='Select Cabin' error={errors?.cabinId?.message}>
         <Select
           value={watch('cabinId')}
@@ -138,7 +125,6 @@ function CreateBookingsForm({ onCloseModal }) {
         />
       </FormRow>
 
-      {/* Guest Selection */}
       <FormRow label='Select Guest' error={errors?.guestId?.message}>
         <Select
           value={watch('guestId')}
@@ -153,7 +139,6 @@ function CreateBookingsForm({ onCloseModal }) {
         />
       </FormRow>
 
-      {/* Status Selection */}
       <FormRow label='Status' error={errors?.status?.message}>
         <Select
           value={watch('status')}
